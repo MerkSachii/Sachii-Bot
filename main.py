@@ -1,9 +1,10 @@
 import sys
 import twitter
 from datetime import datetime, timezone
+import schedule
+import time
 
-
-def main():
+def job():
     message = 'I am live in Heroku! ' + datetime.utcnow().strftime("%a, %b, %D - %T")
     api = twitter.Api(consumer_key='kWTqtf716ZGDUvw9YEXbSU7o3',
                       consumer_secret='g6sIaAm9Ku5LbsC28Ub7hnvvBTznVjdzzKprCgVqnixTGR4E9G',
@@ -16,6 +17,14 @@ def main():
         print("Try explicitly specifying the encoding with the --encoding flag")
         sys.exit(2)
     print("%s just posted: %s" % (status.user.name, status.text))
+
+
+def main():
+    schedule.every(1).hour.do(job)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 
 if __name__ == "__main__":
