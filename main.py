@@ -24,6 +24,7 @@ def main():
 
     while True:
         schedule.run_pending()
+        print("I am runnning")
         time.sleep(1)
 
 
