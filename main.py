@@ -9,9 +9,9 @@ import os
 def job():
     message = 'I am live in Heroku and I am suppose to tweet every hour! ' + datetime.utcnow().strftime("%a, %b, %D - %T")
     api = twitter.Api(consumer_key= os.environ['c_key'],
-                      consumer_secret=['c_sec'],
-                      access_token_key=['a_key'],
-                      access_token_secret=['a_sec'],)
+                      consumer_secret=os.environ['c_sec'],
+                      access_token_key=os.environ['a_key'],
+                      access_token_secret=os.environ['a_sec'],)
     try:
         status = api.PostUpdate(message)
     except UnicodeDecodeError:
