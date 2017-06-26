@@ -3,13 +3,15 @@ import twitter
 from datetime import datetime, timezone
 import schedule
 import time
+import json
+import os
 
 def job():
     message = 'I am live in Heroku and I am suppose to tweet every hour! ' + datetime.utcnow().strftime("%a, %b, %D - %T")
-    api = twitter.Api(consumer_key='kWTqtf716ZGDUvw9YEXbSU7o3',
-                      consumer_secret='g6sIaAm9Ku5LbsC28Ub7hnvvBTznVjdzzKprCgVqnixTGR4E9G',
-                      access_token_key='878885859772162049-3jrDmGf8sxb7rs7b8HvYpUrpCl3kjF3',
-                      access_token_secret='G9XteyJXBmdeNJfDURScrf8DVZVYSCEy8Ug7IfrqNnVuC',)
+    api = twitter.Api(consumer_key= os.environ['c_key'],
+                      consumer_secret=['c_sec'],
+                      access_token_key=['a_key'],
+                      access_token_secret=['a_sec'],)
     try:
         status = api.PostUpdate(message)
     except UnicodeDecodeError:
